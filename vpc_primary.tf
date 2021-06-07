@@ -1,6 +1,6 @@
 # VPC 
 resource "aws_vpc" "my_vpc_one" {
-  cidr_block           = var.vpc_cidr_block_primary
+  cidr_block           = var.primary_vpc_cidr_block
   instance_tenancy     = var.instance_tenancy
   enable_dns_support   = var.is_enabled_dns_support
   enable_dns_hostnames = var.is_enabled_dns_hostnames
