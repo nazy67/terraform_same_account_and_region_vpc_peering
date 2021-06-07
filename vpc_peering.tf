@@ -1,20 +1,32 @@
-// resource "aws_vpc_peering_connection" "my_peering_requester" {
-//   peer_vpc_id   = aws_vpc.my_vpc_two.id
-//   vpc_id        = aws_vpc.my_vpc_one.id
-//   auto_accept   = true
+resource "aws_vpc_peering_connection" "vpc_peering" {
+  peer_vpc_id   = aws_vpc.my_vpc_two.id
+  vpc_id        = aws_vpc.my_vpc_one.id
+  auto_accept   = true
 
-//   accepter {
-//     allow_remote_vpc_dns_resolution = true
-//   }
+  accepter {
+    allow_remote_vpc_dns_resolution = true
+  }
 
-//   requester {
-//     allow_remote_vpc_dns_resolution = true
-//   }
+  requester {
+    allow_remote_vpc_dns_resolution = true
+  }
 
-//   tags = merge(
-//     local.common_tags,
-//     {
-//       Name = "${var.env}_vpc_peering"
-//     }
-//   )
-// }
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${var.env}_vpc_peering"
+    }
+  )
+}
+
+resource "aws_route" "primary2secondary" {
+  route_table_id            = aws_vpc.my_vpc_one.main_route_table_id
+  destination_cidr_block    = var.secondary_vpc_cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
+}
+
+resource "aws_route" "secondary2primary" {
+  route_table_id            = aws_vpc.my_vpc_two.main_route_table_id
+  destination_cidr_block    = var.primary_vpc_cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
+}
