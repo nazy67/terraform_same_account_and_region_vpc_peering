@@ -5,9 +5,14 @@ variable "aws_region" {
 }
 
 # VPC variables
-variable "vpc_cidr_block" {
+variable "vpc_cidr_block_primary" {
   type        = string
-  description = "cidr block for the vpc"
+  description = "cidr block for the primary vpc"
+}
+
+variable "vpc_cidr_block_secondary" {
+  type        = string
+  description = "cidr block for the secondary vpc"
 }
 
 variable "instance_tenancy" {
@@ -31,17 +36,32 @@ variable "rt_cidr_block" {
 }
 
 # Subnet variables
-variable "subnet_azs" {
+variable "first_subnet_azs" {
   type        = list(string)
   description = "The availabitily zones where terraform deploys your infra"
 }
 
-variable "pub_cidr_subnet" {
+variable "second_subnet_azs" {
+  type        = list(string)
+  description = "The availabitily zones where terraform deploys your infra"
+}
+
+variable "first_pub_cidr_subnet" {
   type        = list(string)
   description = "cird blocks for the public subnets"
 }
 
-variable "priv_cidr_subnet" {
+variable "second_pub_cidr_subnet" {
+  type        = list(string)
+  description = "cird blocks for the public subnets"
+}
+
+variable "first_priv_cidr_subnet" {
+  type        = list(string)
+  description = "cidr blocks for the private subnets"
+}
+
+variable "second_priv_cidr_subnet" {
   type        = list(string)
   description = "cidr blocks for the private subnets"
 }
