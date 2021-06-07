@@ -1,8 +1,9 @@
 # Provider region
 aws_region        = "us-east-1"
 # VPC
-vpc_cidr_block_primary    = "10.0.0.0/16"
-vpc_cidr_block_secondary  = "10.1.0.0/16"
+primary_vpc_cidr_block    = "10.0.0.0/16"
+secondary_vpc_cidr_block  = "10.1.0.0/16"
+
 instance_tenancy  = "default"
 is_enabled_dns_support = true
 is_enabled_dns_hostnames = true
