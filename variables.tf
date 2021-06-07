@@ -5,12 +5,12 @@ variable "aws_region" {
 }
 
 # VPC variables
-variable "vpc_cidr_block_primary" {
+variable "primary_vpc_cidr_block" {
   type        = string
   description = "cidr block for the primary vpc"
 }
 
-variable "vpc_cidr_block_secondary" {
+variable "secondary_vpc_cidr_block" {
   type        = string
   description = "cidr block for the secondary vpc"
 }
