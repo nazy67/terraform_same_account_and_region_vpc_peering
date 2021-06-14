@@ -14,23 +14,11 @@ resource "aws_vpc_peering_connection" "vpc_peering" {
   tags = merge(
     local.common_tags,
     {
-    //   Side = "Requester",
       Name = "${var.env}_vpc_peering"
     }
   )
 }
 
-// resource "aws_vpc_peering_connection_accepter" "accepter_peering" {
-//   vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
-//   auto_accept               = true
-
-//   tags = merge(
-//       local.common_tags,
-//       {
-//         Side = "Accepter",
-//         Name = "${var.env}_vpc_peering"
-//       }
-//     )
 
 resource "aws_route" "primary2secondary" {
   route_table_id            = aws_vpc.my_vpc_one.main_route_table_id
