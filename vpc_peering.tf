@@ -20,14 +20,14 @@ resource "aws_vpc_peering_connection" "vpc_peering" {
 }
 
 
-resource "aws_route" "primary2secondary" {
-  route_table_id            = aws_vpc.my_vpc_one.main_route_table_id
+resource "aws_route" "first_pub_rtb_2_second_pub_rtb" {
+  route_table_id            = aws_route_table.first_pub_rtb.id
   destination_cidr_block    = var.secondary_vpc_cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
 }
 
-resource "aws_route" "secondary2primary" {
-  route_table_id            = aws_vpc.my_vpc_two.main_route_table_id
+resource "aws_route" "second_pub_rtb_2_first_pub_rtb" {
+  route_table_id            = aws_route_table.second_pub_rtb.id
   destination_cidr_block    = var.primary_vpc_cidr_block
   vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
 }
