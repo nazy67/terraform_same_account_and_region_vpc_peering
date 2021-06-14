@@ -1,7 +1,7 @@
 resource "aws_vpc_peering_connection" "vpc_peering" {
   peer_vpc_id   = aws_vpc.my_vpc_two.id
   vpc_id        = aws_vpc.my_vpc_one.id
-  auto_accept   = true
+  auto_accept   = false
 
   accepter {
     allow_remote_vpc_dns_resolution = true
@@ -14,10 +14,23 @@ resource "aws_vpc_peering_connection" "vpc_peering" {
   tags = merge(
     local.common_tags,
     {
+      Side = "Requester",
       Name = "${var.env}_vpc_peering"
     }
   )
 }
+
+// resource "aws_vpc_peering_connection_accepter" "accepter_peering" {
+//   vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
+//   auto_accept               = true
+
+//   tags = merge(
+//       local.common_tags,
+//       {
+//         Side = "Accepter",
+//         Name = "${var.env}_vpc_peering"
+//       }
+//     )
 
 resource "aws_route" "primary2secondary" {
   route_table_id            = aws_vpc.my_vpc_one.main_route_table_id
