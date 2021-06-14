@@ -1,4 +1,3 @@
-# VPC 
 resource "aws_vpc" "my_vpc_one" {
   cidr_block           = var.primary_vpc_cidr_block
   instance_tenancy     = var.instance_tenancy
